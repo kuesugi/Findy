@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
+import external.GitHubClient;
+
 /**
  * Servlet implementation class SearchItem
  */
@@ -28,10 +30,14 @@ public class SearchItem extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JSONArray array = new JSONArray();
-		array.put(new JSONObject().put("username", "abcd"));
-		array.put(new JSONObject().put("username", "miao"));
-		RpcHelper.writeJsonArray(response, array);
+		// Get lat and lon params from the request
+		double lat = Double.parseDouble(request.getParameter("lat"));
+		double lon = Double.parseDouble(request.getParameter("lon"));
+		
+		GitHubClient client = new GitHubClient();
+		
+		// Write the search result from github client as a Json array
+		RpcHelper.writeJsonArray(response, client.search(lat, lon, null));
 	}
 
 	/**
