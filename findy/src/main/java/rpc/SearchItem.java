@@ -30,7 +30,7 @@ public class SearchItem extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		JSONArray array = new JSONArray();
 		array.put(new JSONObject().put("username", "abcd"));
-		array.put(new JSONObject().put("username", "1234"));
+		array.put(new JSONObject().put("username", "miao"));
 		RpcHelper.writeJsonArray(response, array);
 	}
 

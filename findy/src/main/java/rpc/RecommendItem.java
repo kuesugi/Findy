@@ -32,7 +32,7 @@ public class RecommendItem extends HttpServlet {
 			throws ServletException, IOException {
 		JSONArray array = new JSONArray();
 		array.put(new JSONObject().put("name", "abcd").put("address", "San Francisco").put("time", "01/01/2017"));
-		array.put(new JSONObject().put("name", "1234").put("address", "San Jose").put("time", "01/01/2017"));
+		array.put(new JSONObject().put("name", "miao").put("address", "San Jose").put("time", "01/01/2017"));
 		RpcHelper.writeJsonArray(response, array);
 	}
 
