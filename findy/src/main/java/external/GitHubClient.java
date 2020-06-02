@@ -60,6 +60,7 @@ public class GitHubClient {
 				JSONArray array = new JSONArray(responseBody);
 	            return getItemList(array);
 			}
+			
 		};
 
 		try {
@@ -75,10 +76,11 @@ public class GitHubClient {
 
 	private List<Item> getItemList(JSONArray array) {
 		List<Item> itemList = new ArrayList<>();
-		for (int i = 0; i < array.length(); ++i) {
+		for (int i = 0; i < array.length(); i++) {
 			JSONObject object = array.getJSONObject(i);
 			ItemBuilder builder = new ItemBuilder();
 			
+			// To avoid null exception, getStringFieldOrEmpty() is used here
 			builder.setItemId(getStringFieldOrEmpty(object, "id"));
 			builder.setName(getStringFieldOrEmpty(object, "title"));
 			builder.setAddress(getStringFieldOrEmpty(object, "location"));

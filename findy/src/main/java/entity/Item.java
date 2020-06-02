@@ -22,6 +22,7 @@ public class Item {
 		this.keywords = builder.keywords;
 	}
 
+	// Getters
 	public String getItemId() {
 		return itemId;
 	}

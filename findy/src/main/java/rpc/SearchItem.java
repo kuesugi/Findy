@@ -39,6 +39,8 @@ public class SearchItem extends HttpServlet {
 		
 		GitHubClient client = new GitHubClient();
 		
+		// Get the list of jobs returned from github api and
+		// transform to JSONArray for the frontend use
 		List<Item> items = client.search(lat, lon, null);
 		JSONArray array = new JSONArray();
 		for (Item item : items) {
