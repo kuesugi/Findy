@@ -53,6 +53,12 @@ public class Item {
 		return obj;
 	}
 
+	/* 
+	 * How build patterns work:
+	 * ItemBuilder builder = new ItemBuilder();		// init a builder
+	 * builder.setItemId("testId");					// set the params
+	 * Item item = builder.build();					// build -> Item
+	*/
 	public static class ItemBuilder {
 		private String itemId;
 		private String name;
