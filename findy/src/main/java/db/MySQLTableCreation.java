@@ -7,6 +7,7 @@ import java.sql.Connection;
 public class MySQLTableCreation {
 	// Run this as Java application to reset the database.
 	public static void main(String[] args) {
+		
 		try {
 			// Connect to MySQL
 			System.out.println("Connecting to " + MySQLDBUtil.URL);

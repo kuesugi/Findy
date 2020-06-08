@@ -8,7 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
+
 import org.json.JSONObject;
+
+import db.MySQLConnection;
+
 import org.json.JSONArray;
 
 import entity.Item;
@@ -33,18 +38,27 @@ public class SearchItem extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Get lat and lon params from the request
+		// Get lat, lon, and userId from the request
 		double lat = Double.parseDouble(request.getParameter("lat"));
 		double lon = Double.parseDouble(request.getParameter("lon"));
+		String userId = request.getParameter("user_id");
 		
 		GitHubClient client = new GitHubClient();
 		
 		// Get the list of jobs returned from github api and
 		// transform to JSONArray for the frontend use
 		List<Item> items = client.search(lat, lon, null);
+		
+		MySQLConnection connection = new MySQLConnection();
+		Set<String> favoritedItemIds = connection.getFavoriteItemIds(userId);
+		connection.close();
+		
 		JSONArray array = new JSONArray();
 		for (Item item : items) {
-			array.put(item.toJSONObject());
+			JSONObject obj = item.toJSONObject();
+			// Need to be aware of which items are one's favorites
+			obj.put("favorite", favoritedItemIds.contains(item.getItemId()));
+			array.put(obj);
 		}
 		
 		// Write the search result from github client as a Json array
