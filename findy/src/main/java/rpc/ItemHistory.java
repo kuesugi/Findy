@@ -34,6 +34,7 @@ public class ItemHistory extends HttpServlet {
 		}
 		
 		String userId = request.getParameter("user_id");
+		
 
 		MySQLConnection connection = new MySQLConnection();
 		Set<Item> items = connection.getFavoriteItems(userId);
